@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    {% for code in head %}
+        {{ code|raw }}
+    {% endfor %}
+    <title>{{ page_title|default('Boardy') }}</title>
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    {% for code in foot %}
+        {{ code|raw }}
+    {% endfor %}
+</body>
+</html>

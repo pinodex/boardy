@@ -1,0 +1,24 @@
+{
+    "meta": {
+        "name": "Default Theme",
+        "description": "Default theme for Boardy",
+        "version": "1.0",
+        "license": "MIT",
+        "author": "Raphael Marco",
+        "link": "http://raphaelmarco.me"
+    },
+
+    "assets": {
+        "css": [
+            "assets/css/main.css"
+        ],
+
+        "js": [
+            "assets/js/app.js"
+        ],
+
+        "others": [
+            
+        ]
+    }
+}
