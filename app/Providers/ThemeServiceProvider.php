@@ -25,7 +25,7 @@ class ThemeServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['theme'] = $app->share(function($theme) use($app) {
+        $app['theme'] = $app->share(function($theme) use ($app) {
             return new Theme($app);
         });
     }
@@ -37,7 +37,7 @@ class ThemeServiceProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        $app->before(function() use($app) {
+        $app->before(function() use ($app) {
             $app['theme'];
         }, Application::EARLY_EVENT);
     }

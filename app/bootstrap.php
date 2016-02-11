@@ -10,31 +10,39 @@
  */
 
 use Silex\Application;
-use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\UrlGeneratorServiceProvider;
-use Silex\Provider\WebProfilerServiceProvider;
-use Silex\Provider\HttpFragmentServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
-use Silex\Provider\TranslationServiceProvider;
-use Boardy\Providers\IlluminateDatabaseServiceProvider;
-use Boardy\Providers\ThemeServiceProvider;
+use Silex\Provider;
+use Boardy\Providers;
+use Boardy\Services;
 
 $app = new Application();
+
+$app->register(new Provider\TwigServiceProvider());
+$app->register(new Provider\UrlGeneratorServiceProvider());
+$app->register(new Provider\SessionServiceProvider());
 
 require ROOT . 'config/app.php';
 
 $app['theme.path'] = ROOT . 'resources/themes/' . $app['theme.name'];
 
-$app->register(new IlluminateDatabaseServiceProvider());
-$app->register(new TwigServiceProvider());
-$app->register(new ThemeServiceProvider());
-$app->register(new UrlGeneratorServiceProvider());
+$app->register(new Providers\IlluminateDatabaseServiceProvider());
+$app->register(new Providers\ThemeServiceProvider());
 
 if ($app['debug']) {
-    $app->register(new HttpFragmentServiceProvider());
-    $app->register(new ServiceControllerServiceProvider());
-    $app->register(new WebProfilerServiceProvider());
+    $app->register(new Provider\HttpFragmentServiceProvider());
+    $app->register(new Provider\ServiceControllerServiceProvider());
+    $app->register(new Provider\WebProfilerServiceProvider());
 }
+
+/*
+ * Initialize connection to database.
+ */
+$app['database'];
+
+$app['session.storage.handler'] = $app->share(function() use ($app) {
+    return new Services\Sessions\IlluminateDatabaseSessionHandler(
+        $app['session.storage.handler.options']
+    );
+});
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');

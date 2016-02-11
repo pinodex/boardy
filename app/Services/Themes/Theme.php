@@ -16,45 +16,39 @@ use Silex\Application;
 class Theme
 {
     /**
-     * Holds the application instance
-     *
-     * @var Silex\Application
+     * @var Silex\Application The application instance
      */
     private $app;
 
     /**
-     * Holds the theme info object
-     *
-     * @var Boardy\Services\Themes\ThemeInfo
+     * @var Boardy\Services\Themes\ThemeInfo The theme info object
      */
     private static $themeInfo;
 
     /**
      * Holds the array of codes that will be added in the
-     * the head part of every template
+     * the head part of every template.
      *
-     * @var array
+     * @var array Associative array of codes
      */
     private static $head = array();
 
     /**
      * Holds the array of codes that will be added in the
-     * the foot part of every template
+     * the foot part of every template.
      *
-     * @var array
+     * @var array Associative array of codes
      */
     private static $foot = array();
 
 
     /**
-     * Holds the Theme instance statically
-     *
-     * @var Boardy\Services\Themes\Theme
+     * @var Boardy\Services\Themes\Theme Theme instance for static calls.
      */
     private static $this;
 
     /**
-     * Constructs the Theme class
+     * Constructs the Theme class.
      *
      * @param Silex\Application $app
      */
@@ -66,7 +60,7 @@ class Theme
     }
 
     /**
-     * Get theme info
+     * Get theme info.
      *
      * @return Boardy\Services\Themes\ThemeInfo
      */
@@ -98,8 +92,8 @@ class Theme
     /**
      * Get view by template name
      *
-     * @param string $template
-     * @param array $args
+     * @param string $template Template name
+     * @param array $args Associative array of args to be passed to template
      *
      * @return string
      */

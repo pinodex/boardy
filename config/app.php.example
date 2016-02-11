@@ -48,3 +48,25 @@ $app['database.connection'] = array(
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci'
 );
+
+/*
+ * Session storage options
+ *
+ * Refer to http://silex.sensiolabs.org/doc/providers/session.html#parameters
+ * for available options.
+ */
+$app['session.storage.options'] = array(
+    'name'              => 'session',
+    'cookie_httponly'   => true,
+    'cookie_lifetime'   => 3600,
+    'lifetime'          => 3600
+);
+
+/*
+ * Session storage handler options
+ *
+ * Options used by the IlluminateDatabaseSessionHandler
+ */
+$app['session.storage.handler.options'] = array(
+    'table' => 'sessions'
+);

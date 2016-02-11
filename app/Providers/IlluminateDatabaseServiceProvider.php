@@ -26,11 +26,11 @@ class IlluminateDatabaseServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['database'] = $app->share(function() use($app) {
-            $capsule = new Capsule;
+        $app['database'] = $app->share(function() use ($app) {
+            $capsule = new Capsule();
 
             $capsule->addConnection($app['database.connection']);
-            $capsule->setEventDispatcher(new Dispatcher(new Container));
+            $capsule->setEventDispatcher(new Dispatcher(new Container()));
 
             $capsule->setAsGlobal();
             $capsule->bootEloquent();
@@ -46,8 +46,5 @@ class IlluminateDatabaseServiceProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        $app->before(function() use($app) {
-            $app['database'];
-        }, Application::EARLY_EVENT);
     }
 }

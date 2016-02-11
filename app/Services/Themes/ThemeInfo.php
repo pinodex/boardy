@@ -26,7 +26,7 @@ class ThemeInfo
     }
 
     /**
-     * Get theme meta
+     * Get theme meta.
      *
      * return array
      */
@@ -36,7 +36,7 @@ class ThemeInfo
     }
 
     /**
-     * Get theme assets
+     * Get theme assets.
      *
      * return array
      */
