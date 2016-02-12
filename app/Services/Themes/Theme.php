@@ -18,7 +18,7 @@ class Theme
     /**
      * @var Silex\Application The application instance
      */
-    private $app;
+    private static $app;
 
     /**
      * @var Boardy\Services\Themes\ThemeInfo The theme info object
@@ -41,22 +41,14 @@ class Theme
      */
     private static $foot = array();
 
-
-    /**
-     * @var Boardy\Services\Themes\Theme Theme instance for static calls.
-     */
-    private static $this;
-
     /**
      * Constructs the Theme class.
      *
      * @param Silex\Application $app
      */
     public function __construct(Application $app) {
-        $this->app = $app;
-        
+        static::$app = $app;
         static::$themeInfo = new ThemeInfo($app['theme.path']);
-        static::$this = $this;
     }
 
     /**
@@ -66,7 +58,7 @@ class Theme
      */
     public static function getThemeInfo()
     {
-        return static::$this->themeInfo;
+        return static::$themeInfo;
     }
 
     /**
@@ -110,7 +102,7 @@ class Theme
         $args['head'] = array_merge(static::$head, $args['head']);
         $args['foot'] = array_merge(static::$foot, $args['foot']);
 
-        return static::$this->app['twig']->render('@theme/' . $template . '.html', $args);
+        return static::$app['twig']->render('@theme/' . $template . '.html', $args);
     }
 
 }

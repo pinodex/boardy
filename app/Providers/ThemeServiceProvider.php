@@ -14,7 +14,6 @@ namespace Boardy\Providers;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Boardy\Services\Themes\Theme;
-use Boardy\Services\Themes\ThemeInfo;
 
 class ThemeServiceProvider implements ServiceProviderInterface
 {

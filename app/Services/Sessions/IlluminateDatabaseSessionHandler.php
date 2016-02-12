@@ -11,7 +11,6 @@
 
 namespace Boardy\Services\Sessions;
 
-use Silex\Application;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface

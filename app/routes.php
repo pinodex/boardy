@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Symfony\Component\HttpFoundation\Response;
 use Boardy\Routes;
 
 $app->mount('/', new Routes\MainRoute);
