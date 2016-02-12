@@ -34,6 +34,20 @@ $app['twig.options'] = array(
 );
 
 /*
+ * Assets options
+ *
+ * Options:
+ *   debug_base: Base of the route to be used to access assets when debug is true.
+ *   public_path: Physical path to publicly accessible directory.
+ *   public_base: Path to be used in the web.
+ */
+$app['assets.options'] = array(
+    'debug_base'    => '/_assets_debug_',
+    'public_path'   => ROOT . 'public/assets',
+    'public_base'   => '/assets'
+);
+
+/*
  * Database connection
  *
  * Defines the connection parameters that will be used to

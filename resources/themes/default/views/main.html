@@ -6,6 +6,7 @@
         {{ code|raw }}
     {% endfor %}
     <title>{{ page_title|default('Boardy') }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css') }}">
 </head>
 <body>
     {% block content %}{% endblock %}

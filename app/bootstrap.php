@@ -26,6 +26,7 @@ $app['theme.path'] = ROOT . 'resources/themes/' . $app['theme.name'];
 
 $app->register(new Providers\IlluminateDatabaseServiceProvider());
 $app->register(new Providers\ThemeServiceProvider());
+$app->register(new Providers\AssetsServiceProvider());
 
 if ($app['debug']) {
     $app->register(new Provider\HttpFragmentServiceProvider());
@@ -46,6 +47,14 @@ $app['session.storage.handler'] = $app->share(function() use ($app) {
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
+
+$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
+    $twig->addFunction(new \Twig_SimpleFunction('asset', function($path) use ($app) {
+        return $app['assets']->get($path);
+    }));
+
+    return $twig;
+}));
 
 require 'routes.php';
 return $app;
