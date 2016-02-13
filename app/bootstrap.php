@@ -41,9 +41,12 @@ $app['database'];
 
 $app['session.storage.handler'] = $app->share(function() use ($app) {
     return new Services\Sessions\IlluminateDatabaseSessionHandler(
+        $app['database'],
         $app['session.storage.handler.options']
     );
 });
+
+$app->register(new Providers\DbConfigServiceProvider());
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
