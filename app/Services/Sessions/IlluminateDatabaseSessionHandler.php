@@ -16,6 +16,11 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
 {
     /**
+     * @var Illuminate\Database\Capsule\Manager Database capsule instance
+     */
+    private $capsule;
+
+    /**
      * @var array Database session storage options
      */
     private $options;
@@ -30,8 +35,9 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
      *
      * @param array $app
      */
-    public function __construct($options)
+    public function __construct(Capsule $capsule, $options)
     {
+        $this->capsule = $capsule;
         $this->options = $options;
     }
 
@@ -42,7 +48,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
      */
     public function table()
     {
-        return Capsule::table($this->options['table']);
+        return $this->capsule->table($this->options['table']);
     }
 
     /**
