@@ -61,4 +61,16 @@ class Config implements SourceInterface
     {
         return $this->source->set($key, $value);
     }
+
+    /**
+     * Magic method to allow directly getting config entry
+     *
+     * @param string $key Entry key
+     *
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->get($key);
+    }
 }

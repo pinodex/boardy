@@ -42,7 +42,7 @@ $app['twig.options'] = array(
  *   public_base: Path to be used in the web.
  */
 $app['assets.options'] = array(
-    'debug_base'    => '/_assets_debug_',
+    'debug_base'    => '/tmp',
     'public_path'   => ROOT . 'public/assets',
     'public_base'   => '/assets'
 );
