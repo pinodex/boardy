@@ -14,7 +14,6 @@ namespace Boardy\Controllers\Api;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Boardy\Services\Themes\Theme;
 
 class MainController
 {

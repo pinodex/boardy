@@ -14,7 +14,6 @@ namespace Boardy\Routes\Api;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MainRoute implements ControllerProviderInterface
 {
