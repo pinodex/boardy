@@ -2,6 +2,9 @@ public/assets/
 vendor/
 cache/
 
+node_modules/
+.sass-cache/
+
 *.sublime-project
 *.sublime-workspace
 

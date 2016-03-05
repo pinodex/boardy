@@ -1,0 +1,302 @@
+/*!
+ * Boardy Default Theme
+ * (c) 2016, Raphael Marco
+ */
+
+$font-size-body: 14px;
+$font-family-default:  'Open Sans', 'Helvatica', sans-serif;
+
+$link-color: #2196f3;
+
+$darken-color-percent: 10%;
+
+$success-color: #00bcd4;
+$error-color:   #f44336;
+$warning-color: #ff9800;
+$info-color:    #4caf50;
+$neutral-color: #9e9e9e;
+
+$success-color-dark: darken($success-color, $darken-color-percent);
+$error-color-dark:   darken($error-color, $darken-color-percent);
+$warning-color-dark: darken($warning-color, $darken-color-percent);
+$info-color-dark:    darken($info-color, $darken-color-percent);
+$neutral-color-dark: darken($neutral-color, $darken-color-percent);
+
+$global-margin-bottom: 1em;
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+            border-radius: $radius;
+}
+
+html {
+    body {
+        font: $font-size-body $font-family-default;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+}
+
+div {
+    overflow: hidden;
+}
+
+.top-bar {
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    padding: 0;
+
+    .title {
+        padding: 1em;
+        padding-left: 0;
+        float: left;
+    }
+
+    nav {
+        overflow: hidden;
+        
+        ul {
+            display: inline-block;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                display: inline;
+
+                &.dropdown ul {
+                    a {
+                        display: block;
+                    }
+                }
+
+                &.dropdown:not(.active) ul {
+                    display: none;
+                }
+
+                &.active {
+                    & > a {
+                        color: #000 !important;
+                    }
+                }
+            }
+
+            &.right .dropdown ul {
+                &:before, &:after {
+                    left: 210px;
+                }
+            }
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 1em;
+            color: #999;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.success {
+    color: $success-color;
+}
+
+.error {
+    color: $error-color;
+}
+
+.warning {
+    color: $warning-color;
+}
+
+.info {
+    color: $info-color;
+}
+
+.neutral {
+    color: $neutral-color;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+}
+
+input,
+select,
+textarea {
+    box-sizing: border-box;
+    margin-bottom: $global-margin-bottom;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    padding: 0.5em;
+    border: 1px solid #ddd;
+    outline: none;
+    width: 100%;
+
+    @include border-radius(0.3em);
+}
+
+select {
+    background: #fff;
+}
+
+input[type="button"], button, .button {
+    display: inline-block;
+    border: none;
+    outline: none;
+    padding: 0.5em 1em;
+    margin-bottom: $global-margin-bottom;
+    cursor: pointer;
+
+    @include border-radius(0.3em);
+
+    &:active {
+        box-shadow: 0 0 10px #555 inset;
+    }
+
+    &.success {
+        background: $success-color;
+        color: #fff;
+
+        &:hover {
+            background: $success-color-dark;
+        }
+    }
+
+    &.error {
+        background: $error-color;
+        color: #fff;
+
+        &:hover {
+            background: $error-color-dark;
+        }
+    }
+
+    &.warning {
+        background: $warning-color;
+        color: #fff;
+
+        &:hover {
+            background: $warning-color-dark;
+        }
+    }
+
+    &.info {
+        background: $info-color;
+        color: #fff;
+
+        &:hover {
+            background: $info-color-dark;
+        }
+    }
+
+    &.neutral {
+        background: $neutral-color;
+        color: #fff;
+
+        &:hover {
+            background: $neutral-color-dark;
+        }
+    }
+
+    @extend button.info
+}
+
+.background {
+    color: #fff;
+    margin-bottom: $global-margin-bottom;
+
+    &.success {
+        background: $success-color;
+    }
+
+    &.error {
+        background: $error-color;
+    }
+
+    &.warning {
+        background: $warning-color;
+    }
+
+    &.info {
+        background: $info-color;
+    }
+
+    &.neutral {
+        background: $neutral-color;
+    }
+}
+
+.dropdown {
+    ul {
+        background: #fff;
+        border: 1px solid #eee;
+        min-width: 150px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: block !important;
+        }
+
+        a {
+            padding: 0.5em;
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+    }
+}
+
+.dropdown ul {
+    float: left;
+
+    &:before, &:after {
+        content: ' ';
+        border: 10px solid transparent;
+        position: absolute;
+        left: 20px;
+        height: 0;
+        width: 0;
+    }
+
+    &:before {
+        border-bottom-color: #fff; 
+        position: absolute;
+        top: -19px;
+        z-index: 2;
+    }
+
+    &:after {
+        border-bottom-color: #eee;
+        position: absolute;
+        top: -21px;
+        z-index: 1;
+    }
+}
+
+.container {
+    padding-left: 1em;
+    padding-right: 1em;
+}

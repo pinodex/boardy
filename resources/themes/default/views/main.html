@@ -5,14 +5,56 @@
     {% for code in head %}
         {{ code|raw }}
     {% endfor %}
-    <title>{{ page_title|default('Boardy') }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css') }}">
+    <title>{{ page_title | default() }} - {{ forum_name }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/normalize.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/global.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}" />
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 </head>
 <body>
+    <div class="top-bar container">
+        <span class="title">{{ forum_name }}</span>
+        <nav>
+            <ul class="left">
+                <li>
+                    <a href="{{ path('site.index') }}">Home</a>
+                </li>
+                <li>
+                    <a href="#">Test Menu Item</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Test Dropdown</a>
+
+                    <ul>
+                        <li>
+                            <a href="#">Sub menu 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Sub menu 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Sub menu 3</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="right">
+                <li>
+                    <a href="#">Right menu</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     {% block content %}{% endblock %}
 
     {% for code in foot %}
         {{ code|raw }}
     {% endfor %}
+    <script src="{{ asset('/js/vendor/jquery.min.js') }}"></script>
+    <script src="{{ asset('/js/vendor/boardy.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>
