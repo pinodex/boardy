@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Boardy\Controllers\Main;
+namespace Boardy\Controllers\Api;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Boardy\Services\Themes\Theme;
 
 class MainController
 {
     public function index(Request $request, Application $app)
     {
-        return Theme::view('index');
+        return new JsonResponse();
     }
 }
