@@ -4,28 +4,55 @@
  */
 
 (function() {
-    
-})();
+    var _window = $(window);
+    var topBarNav = $('.top-bar nav');
 
-$('.dropdown > *:first-child').click(function(e) {
-    e.preventDefault();
+    $('.top-bar .toggle').click(function() {
+        $(this).parent().find('nav').toggleClass('active');
+    });
 
-    var dropdown = $(this).parent();
-    var menu = dropdown.find('ul');
+    $('.dropdown > *:first-child').click(function(e) {
+        e.preventDefault();
 
-    if (!dropdown.hasClass('touched')) {
-        var position = dropdown.offset();
+        var dropdown = $(this).parent();
+        var menu = dropdown.find('ul');
 
-        position.position = 'absolute';
-        position.top += $(this).height() * 2;
+        if (!dropdown.hasClass('touched')) {
+            var position = dropdown.offset();
 
-        if (position.left + dropdown.width() >= screen.width) {
-            position.left -= dropdown.width() + 140;
+            position.position = 'absolute';
+            position.top += dropdown.height();
+
+            //console.log(position.left, dropdown.width());
+
+            if (position.left + 150 >= _window.width()) {
+                position.left -= _window.width() - position.left - dropdown.width();
+
+                menu.addClass('arrow-right');
+            } else {
+                menu.addClass('arrow-left');
+            }
+            
+            menu.css(position);
         }
-        
-        menu.css(position);
-    }
 
-    dropdown.addClass('touched').toggleClass('active');
-    $('.dropdown').not(dropdown).removeClass('active');
-});
+        dropdown.addClass('touched').toggleClass('active');
+        $('.dropdown').not(dropdown).removeClass('active');
+    });
+
+    _window.resize(function() {
+        $.each($('.dropdown'), function() {
+            var dropdown = $(this);
+            var menu = dropdown.find('ul');
+            var position = dropdown.offset();
+
+            position.top += dropdown.height();
+
+            if (position.left + 150 >= _window.width()) {
+                position.left -= _window.width() - position.left - dropdown.width();
+            }
+            
+            menu.css(position);
+        });
+    });
+})();

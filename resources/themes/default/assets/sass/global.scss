@@ -24,6 +24,9 @@ $neutral-color-dark: darken($neutral-color, $darken-color-percent);
 
 $global-margin-bottom: 1em;
 
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
        -moz-border-radius: $radius;
@@ -45,29 +48,84 @@ div {
     overflow: hidden;
 }
 
+// Using Bootstrap's grid system
+@import "bootstrap/grid";
+
+@media (min-width: $screen-sm-min) {
+    .top-bar {
+        .title {
+            display: inline-block;
+            float: left;
+        }
+
+        .toggle {
+            display: none;
+        }
+
+        nav {
+            border: none;
+            margin: 0;
+
+            ul {
+                display: inline-block;
+
+                li {
+                    display: inline-block;
+                }
+
+                &.nav-left {
+                    float: left;
+                }
+
+                &.nav-right {
+                    float: right;
+                }
+            }
+
+            a {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+@media (max-width: $screen-sm-min) {
+    .top-bar nav {
+        &:not(.active) {
+            display: none;
+        }
+    }
+}
+
 .top-bar {
     border-bottom: 1px solid #eee;
     overflow: hidden;
     padding: 0;
 
     .title {
+        display: block;
         padding: 1em;
         padding-left: 0;
-        float: left;
+    }
+
+    .toggle {
+        float: right;
+        margin-top: 7px;
+        margin-bottom: 0;
     }
 
     nav {
         overflow: hidden;
+        border-top: 1px solid #eee;
+        margin-left: -$grid-gutter-width / 2;
+        margin-right: -$grid-gutter-width / 2;
         
         ul {
-            display: inline-block;
             list-style: none;
             margin: 0;
             padding: 0;
 
             li {
-                display: inline;
-
                 &.dropdown ul {
                     a {
                         display: block;
@@ -84,16 +142,10 @@ div {
                     }
                 }
             }
-
-            &.right .dropdown ul {
-                &:before, &:after {
-                    left: 210px;
-                }
-            }
         }
 
         a {
-            display: inline-block;
+            display: block;
             text-decoration: none;
             padding: 1em;
             color: #999;
@@ -276,7 +328,6 @@ input[type="button"], button, .button {
         content: ' ';
         border: 10px solid transparent;
         position: absolute;
-        left: 20px;
         height: 0;
         width: 0;
     }
@@ -294,9 +345,16 @@ input[type="button"], button, .button {
         top: -21px;
         z-index: 1;
     }
-}
 
-.container {
-    padding-left: 1em;
-    padding-right: 1em;
+    &.arrow-left {
+        &:before, &:after {
+            left: 20px;
+        }
+    }
+
+    &.arrow-right {
+        &:before, &:after {
+            right: 20px;
+        }
+    }
 }
