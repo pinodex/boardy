@@ -11,20 +11,10 @@
 
 namespace Boardy\Services\Themes;
 
-use Silex\Application;
+use Boardy\Services\Service;
 
-class Theme
+class Theme extends Service
 {
-    /**
-     * @var Silex\Application The application instance
-     */
-    private static $app;
-
-    /**
-     * @var Boardy\Services\Themes\ThemeInfo The theme info object
-     */
-    private static $themeInfo;
-
     /**
      * Holds the array of codes that will be added in the
      * the head part of every template.
@@ -40,26 +30,6 @@ class Theme
      * @var array Associative array of codes
      */
     private static $foot = array();
-
-    /**
-     * Constructs the Theme class.
-     *
-     * @param Silex\Application $app
-     */
-    public function __construct(Application $app) {
-        static::$app = $app;
-        static::$themeInfo = new ThemeInfo($app['theme.path']);
-    }
-
-    /**
-     * Get theme info.
-     *
-     * @return Boardy\Services\Themes\ThemeInfo
-     */
-    public static function getThemeInfo()
-    {
-        return static::$themeInfo;
-    }
 
     /**
      * Add code to head
