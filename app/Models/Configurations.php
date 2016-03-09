@@ -24,4 +24,9 @@ class Configurations extends Model
      * {@inheritdoc}
      */
     public $timestamps = false;
+
+    /**
+     * {@inheritdoc}
+     */
+    public $incrementing = false;
 }
