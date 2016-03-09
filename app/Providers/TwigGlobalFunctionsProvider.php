@@ -13,6 +13,7 @@ namespace Boardy\Providers;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Boardy\Services\Config\Config;
 
 class TwigGlobalFunctionsProvider implements ServiceProviderInterface
 {
@@ -23,21 +24,17 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['twig'] = $app->share($app->extend('twig', function(\Twig_Environment $twig, Application $app) {
-            $twig->addGlobal('app', null);
-
+        $app->extend('twig', function(\Twig_Environment $twig, Application $app) {
             $twig->addFunction(new \Twig_SimpleFunction('asset', function($path) use ($app) {
                 return $app['assets']->get($path);
             }));
 
             $twig->addFunction(new \Twig_SimpleFunction('config', function($key, $default = null) use ($app) {
-                return $app['config']->get($key, $default);
+                return Config::get($key, $default);
             }));
 
-            $twig->addGlobal('forum_name', $app['config']->get('forum_name', 'Boardy Forums'));
-
             return $twig;
-        }));
+        });
     }
 
     /**
@@ -47,5 +44,17 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
+        $app->extend('twig', function(\Twig_Environment $twig, Application $app) {
+            $twig->addGlobal('app', null);
+            $twig->addGlobal('forum_name', Config::get('forum_name', 'Boardy Forums'));
+            $twig->addGlobal('request_uri', $app['request']->getRequestUri());
+            $twig->addGlobal('request_route', $app['request']->get('_route'));
+
+            if (isset($app['flashbag'])) {
+                $twig->addGlobal('flashbag', $app['flashbag']);
+            }
+
+            return $twig;
+        });
     }
 }
