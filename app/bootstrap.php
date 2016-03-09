@@ -27,7 +27,6 @@ require ROOT . 'config/app.php';
 $app['theme.path'] = ROOT . 'resources/themes/' . $app['theme.name'];
 
 $app->register(new Providers\IlluminateDatabaseServiceProvider());
-$app->register(new Providers\ThemeServiceProvider());
 $app->register(new Providers\AssetsServiceProvider());
 
 if ($app['debug']) {
