@@ -13,6 +13,8 @@ use Silex\Application;
 use Silex\Provider;
 use Boardy\Providers;
 use Boardy\Services;
+use Boardy\Services\Service;
+use Boardy\Services\Config\Config;
 
 $app = new Application();
 
@@ -46,11 +48,13 @@ $app['session.storage.handler'] = $app->share(function() use ($app) {
     );
 });
 
-$app->register(new Providers\DbConfigServiceProvider());
 $app->register(new Providers\TwigGlobalFunctionsProvider());
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
+
+Service::setApp($app);
+Config::load();
 
 require 'routes.php';
 return $app;

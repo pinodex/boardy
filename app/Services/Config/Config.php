@@ -11,66 +11,74 @@
 
 namespace Boardy\Services\Config;
 
-use Boardy\Services\Config\Sources\SourceInterface;
+use Boardy\Services\Service;
+use Boardy\Models\Configurations;
 
-class Config implements SourceInterface
+class Config extends Service
 {
     /**
-     * @var Boardy\Services\Config\Sources\SourceInterface Config source to use
+     * @var array Associative array of config values
      */
-    private $source;
+    private static $config = array();
 
     /**
-     * Constructs Config
+     * Load config values from database
+     */
+    public static function load()
+    {
+        $entries = Configurations::get();
+        
+        foreach ($entries as $entry) {
+            self::$config[$entry->id] = unserialize($entry->value);
+        }
+    }
+
+    /**
+     * Get entry by id
      *
-     * @param Boardy\Services\Config\Sources\SourceInterface $source Config source to use
-     */
-    public function __construct(SourceInterface $source)
-    {
-        $this->source = $source;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function open()
-    {
-        return $this->source->open();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function close()
-    {
-        return $this->source->close();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        return $this->source->get($key, $default);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value)
-    {
-        return $this->source->set($key, $value);
-    }
-
-    /**
-     * Magic method to allow directly getting config entry
-     *
-     * @param string $key Entry key
+     * @param string $id Entry id
+     * @param mixed $default Default value when config entry does not exist
      *
      * @return mixed
      */
-    public function __get($key)
+    public static function get($id, $default = null)
     {
-        return $this->get($key);
+        if (array_key_exists($id, self::$config)) {
+            return self::$config[$id];
+        }
+
+        return $default;
     }
+
+    /**
+     * Set entry by id
+     *
+     * @param string $id Entry id
+     * @param mixed $value Entry value
+     */
+    public static function set($id, $value)
+    {
+        self::$config[$id] = $value;
+
+        if (Configurations::where('id', $id)->exists()) {
+            Configurations::where('id', $id)->update([
+                'value' => serialize($value)
+            ]);
+
+            return;
+        }
+
+        Configurations::insert([
+            'id' => $id,
+            'value' => serialize($value)
+        ]);
+    }
+
+    public static function remove($id)
+    {
+        if ($value = Configurations::find($id)) {
+            $value->delete();
+        }
+    }
+
 }
