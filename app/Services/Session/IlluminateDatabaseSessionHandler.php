@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boardy\Services\Sessions;
+namespace Boardy\Services\Session;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
