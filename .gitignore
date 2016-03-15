@@ -8,5 +8,7 @@ node_modules/
 *.sublime-project
 *.sublime-workspace
 
+composer.lock
+
 config/*
 !config/*.example
