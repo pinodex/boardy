@@ -68,7 +68,7 @@ class AuthController
 
     public function logout(Request $request, Application $app)
     {
-        if (isCsrfTokenValid($app, 'logout', $request->query->get('token'))) {
+        if (isCsrfTokenValid('logout', $request->query->get('token'))) {
             Auth::logout();
         }
 
