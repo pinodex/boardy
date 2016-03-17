@@ -45,6 +45,5 @@ function handleFormErrors($form, $errors)
  */
 function isCsrfTokenValid($identifier, $token)
 {
-    dd(Csrf::generate('test'));
     return Csrf::isValid($identifier, $token);
 }
