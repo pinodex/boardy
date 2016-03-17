@@ -19,7 +19,7 @@
             <span class="title">{{ forum_name }}</span>
             <nav>
                 <ul class="nav-left">
-                    <li>
+                    <li{{ (request_route == 'site.index') ? ' class="active"' : '' }}>
                         <a href="{{ path('site.index') }}">Home</a>
                     </li>
                     <li>
@@ -43,12 +43,24 @@
                 </ul>
 
                 <ul class="nav-right">
-                    <li>
-                        <a href="#">Login</a>
-                    </li>
-                    <li>
-                        <a href="#">Register</a>
-                    </li>
+                    {% if current_user %}
+                        <li class="dropdown">
+                            <a href="#">{{ current_user.name }}</a>
+
+                            <ul>
+                                <li>
+                                    <a href="{{ path('auth.logout', {token: csrf_token('logout')}) }}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li{{ (request_route == 'auth.login') ? ' class="active"' : '' }}>
+                            <a href="{{ path('auth.login') }}">Login</a>
+                        </li>
+                        <li>
+                            <a href="#">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

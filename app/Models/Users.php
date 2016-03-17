@@ -35,6 +35,11 @@ class Users extends Model
     protected $fillable = ['name', 'username', 'email', 'password'];
 
     /**
+     * {@inheritdoc}
+     */
+    protected $hidden = ['password'];
+
+    /**
      * Allows for automatic password hashing
      *
      * @param string $password User's password

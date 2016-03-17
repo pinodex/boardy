@@ -10,10 +10,10 @@ $link-color: #2196f3;
 
 $darken-color-percent: 10%;
 
-$success-color: #00bcd4;
+$success-color: #4caf50;
 $error-color:   #f44336;
 $warning-color: #ff9800;
-$info-color:    #4caf50;
+$info-color:    #00bcd4;
 $neutral-color: #9e9e9e;
 
 $success-color-dark: darken($success-color, $darken-color-percent);
@@ -37,8 +37,11 @@ $global-margin-bottom: 1em;
 html {
     body {
         font: $font-size-body $font-family-default;
+        overflow-y: scroll;
     }
 }
+
+@import "bootstrap/type";
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
@@ -48,7 +51,6 @@ div {
     overflow: hidden;
 }
 
-// Using Bootstrap's grid system
 @import "bootstrap/grid";
 
 @media (min-width: $screen-sm-min) {
@@ -63,7 +65,6 @@ div {
         }
 
         nav {
-            border: none;
             margin: 0;
 
             ul {
@@ -91,6 +92,8 @@ div {
 
 @media (max-width: $screen-sm-min) {
     .top-bar nav {
+        border-top: 1px solid #eee;
+
         &:not(.active) {
             display: none;
         }
@@ -116,7 +119,6 @@ div {
 
     nav {
         overflow: hidden;
-        border-top: 1px solid #eee;
         margin-left: -$grid-gutter-width / 2;
         margin-right: -$grid-gutter-width / 2;
         
@@ -127,6 +129,8 @@ div {
 
             li {
                 &.dropdown ul {
+                    z-index: 1;
+                    
                     a {
                         display: block;
                     }
@@ -138,7 +142,8 @@ div {
 
                 &.active {
                     & > a {
-                        color: #000 !important;
+                        background: $info-color-dark;
+                        color: #fff;
                     }
                 }
             }
@@ -155,6 +160,14 @@ div {
             }
         }
     }
+}
+
+.after-nav {
+    margin-top: 1.5em;
+}
+
+.no-mb {
+    margin-bottom: 0;
 }
 
 .left {
@@ -190,11 +203,17 @@ a {
     text-decoration: none;
 }
 
+@import "bootstrap/forms";
+
 input,
 select,
 textarea {
     box-sizing: border-box;
     margin-bottom: $global-margin-bottom;
+
+    &:focus, &.form-control:focus {
+        box-shadow: none;
+    }
 }
 
 input[type="text"],
@@ -206,7 +225,7 @@ select {
     outline: none;
     width: 100%;
 
-    @include border-radius(0.3em);
+    @include border-radius(0);
 }
 
 select {
@@ -221,7 +240,7 @@ input[type="button"], button, .button {
     margin-bottom: $global-margin-bottom;
     cursor: pointer;
 
-    @include border-radius(0.3em);
+    @include border-radius(0);
 
     &:active {
         box-shadow: 0 0 10px #555 inset;
@@ -274,6 +293,35 @@ input[type="button"], button, .button {
 
     @extend button.info
 }
+
+label {
+    font-weight: normal;
+}
+
+form .alert {
+    font-size: 11px;
+}
+
+.form-group {
+    input {
+        margin-bottom: 0;
+    }
+
+    &.has-error {
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+        ul {
+            list-style: none;
+            font-size: 11px;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+@import "bootstrap/alerts";
 
 .background {
     color: #fff;
@@ -356,5 +404,22 @@ input[type="button"], button, .button {
         &:before, &:after {
             right: 20px;
         }
+    }
+}
+
+.window {
+    overflow: hidden;
+    @include border-radius(0.3em);
+
+    & > h2 {
+        font-size: 1em;
+        padding: 1em;
+        margin: 0;
+    }
+
+    & > .content {
+        border: 1px solid #ddd;
+        border-top: none;
+        padding: 1em;
     }
 }

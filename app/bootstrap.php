@@ -16,11 +16,21 @@ use Boardy\Services;
 use Boardy\Services\Service;
 use Boardy\Services\Config\Config;
 
-$app = new Application();
+class Boardy extends Application {
+    use Application\FormTrait;
+    use Application\UrlGeneratorTrait;
+}
+
+$app = new Boardy();
 
 $app->register(new Provider\TwigServiceProvider());
-$app->register(new Provider\UrlGeneratorServiceProvider());
+$app->register(new Provider\FormServiceProvider());
 $app->register(new Provider\SessionServiceProvider());
+$app->register(new Provider\UrlGeneratorServiceProvider());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'translator.messages' => array()
+));
 
 require ROOT . 'config/app.php';
 
@@ -48,6 +58,7 @@ $app['session.storage.handler'] = $app->share(function() use ($app) {
 });
 
 $app->register(new Providers\TwigGlobalFunctionsProvider());
+$app->register(new Providers\FlashBagServiceProvider());
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
@@ -56,4 +67,6 @@ Service::setApp($app);
 Config::load();
 
 require 'routes.php';
+require 'helpers.php';
+
 return $app;

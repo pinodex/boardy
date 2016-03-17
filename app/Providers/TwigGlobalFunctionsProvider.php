@@ -14,6 +14,7 @@ namespace Boardy\Providers;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Boardy\Services\Config\Config;
+use Boardy\Services\Auth\Auth;
 
 class TwigGlobalFunctionsProvider implements ServiceProviderInterface
 {
@@ -47,6 +48,7 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
         $app->extend('twig', function(\Twig_Environment $twig, Application $app) {
             $twig->addGlobal('app', null);
             $twig->addGlobal('forum_name', Config::get('forum_name', 'Boardy Forums'));
+            $twig->addGlobal('current_user', Auth::user());
             $twig->addGlobal('request_uri', $app['request']->getRequestUri());
             $twig->addGlobal('request_route', $app['request']->get('_route'));
 

@@ -40,6 +40,14 @@
         $('.dropdown').not(dropdown).removeClass('active');
     });
 
+    $(document).click(function(e) {
+        var dropdown = $(e.target).parent('.dropdown');
+
+        if (dropdown.length == 0) {
+            $('.dropdown').removeClass('active');
+        }
+    });
+
     _window.resize(function() {
         $.each($('.dropdown'), function() {
             var dropdown = $(this);

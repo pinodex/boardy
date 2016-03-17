@@ -13,6 +13,7 @@ use Boardy\Routes;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 $app->mount('/', new Routes\Site\MainRoute);
+$app->mount('/auth', new Routes\Site\AuthRoute);
 
 $app->mount('/api', new Routes\Api\MainRoute);
 $app->mount('/api/users', new Routes\Api\MainRoute);
