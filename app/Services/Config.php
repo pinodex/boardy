@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boardy\Services\Config;
+namespace Boardy\Services;
 
 use Boardy\Services\Service;
 use Boardy\Models\Configurations;

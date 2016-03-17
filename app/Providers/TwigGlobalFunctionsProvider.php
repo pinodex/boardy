@@ -13,8 +13,8 @@ namespace Boardy\Providers;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
-use Boardy\Services\Config\Config;
-use Boardy\Services\Auth\Auth;
+use Boardy\Services\Config;
+use Boardy\Services\Auth;
 
 class TwigGlobalFunctionsProvider implements ServiceProviderInterface
 {

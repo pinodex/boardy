@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Boardy\Services\Auth;
+namespace Boardy\Services;
 
-use Boardy\Services\Service;
 use Boardy\Services\Session\Session;
-use Boardy\Services\Hash\Hash;
+use Boardy\Services\Service;
+use Boardy\Services\Hash;
 use Boardy\Models\Users;
 use Silex\Application;
 

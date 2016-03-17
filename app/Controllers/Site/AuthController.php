@@ -15,8 +15,8 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Validator\Constraints as Assert;
-use Boardy\Services\Themes\Theme;
-use Boardy\Services\Auth\Auth;
+use Boardy\Services\Theme;
+use Boardy\Services\Auth;
 
 class AuthController
 {

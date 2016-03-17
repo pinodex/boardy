@@ -13,8 +13,6 @@ use Silex\Application;
 use Silex\Provider;
 use Boardy\Providers;
 use Boardy\Services;
-use Boardy\Services\Service;
-use Boardy\Services\Config\Config;
 
 class Boardy extends Application {
     use Application\FormTrait;
@@ -63,8 +61,8 @@ $app->register(new Providers\FlashBagServiceProvider());
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
 
-Service::setApp($app);
-Config::load();
+Services\Service::setApp($app);
+Services\Config::load();
 
 require 'routes.php';
 require 'helpers.php';

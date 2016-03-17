@@ -13,7 +13,7 @@ namespace Boardy\Controllers\Site;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Boardy\Services\Themes\Theme;
+use Boardy\Services\Theme;
 
 class MainController
 {

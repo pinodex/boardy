@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Boardy\Services\Hash;
+namespace Boardy\Services;
 
 class Hash
 {
