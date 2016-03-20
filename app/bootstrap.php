@@ -9,6 +9,7 @@
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Debug;
 use Silex\Application;
 use Silex\Provider;
 use Boardy\Providers;
@@ -31,6 +32,11 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 ));
 
 require ROOT . 'config/app.php';
+
+Debug\ErrorHandler::register();
+Debug\ExceptionHandler::register(
+    $app['debug']
+);
 
 $app['theme.path'] = ROOT . 'resources/themes/' . $app['theme.name'];
 
