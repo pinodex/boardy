@@ -74,10 +74,16 @@ class Config extends Service
         ]);
     }
 
+    /**
+     * Remove entry
+     *
+     * @param string $id Entry id
+     */
     public static function remove($id)
     {
         if ($value = Configurations::find($id)) {
             $value->delete();
+            unset(self::$config[$id]);
         }
     }
 
