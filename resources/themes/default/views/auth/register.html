@@ -1,0 +1,21 @@
+{% extends '@theme/main.html' %}
+
+{% form_theme registration_form '@theme/_layouts/form.html' %}
+
+{% block content %}
+    <div class="after-nav container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-4">
+                <div class="window">
+                    <h2 class="background neutral">Register</h2>
+                    <div class="content">
+                        <form action="{{ request_uri }}" method="post">
+                            {{ form_widget(registration_form) }}
+                            <button type="submit" class="success no-mb right">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

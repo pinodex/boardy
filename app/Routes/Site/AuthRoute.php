@@ -21,7 +21,7 @@ class AuthRoute implements ControllerProviderInterface
         $controller = $app['controllers_factory'];
         $controller->match('/login', 'Boardy\Controllers\Site\AuthController::login')->bind('auth.login');
         $controller->get('/logout', 'Boardy\Controllers\Site\AuthController::logout')->bind('auth.logout');
-        $controller->match('/login', 'Boardy\Controllers\Site\AuthController::login')->bind('auth.login');
+        $controller->match('/register', 'Boardy\Controllers\Site\AuthController::register')->bind('auth.register');
 
         if ($app['https']) {
             $controller->requireHttps();

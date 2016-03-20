@@ -40,9 +40,6 @@ class Auth extends Service
 
         if ($user = Users::where('username', $data)->orWhere('email', $data)->first()) {
             if (Hash::check($password, $user->password)) {
-                $user->last_login_at = currentDate();
-                $user->save();
-
                 return $user;
             }
         }
@@ -77,6 +74,19 @@ class Auth extends Service
     public static function guest()
     {
         return self::user() === null;
+    }
+
+    /**
+     * Login user
+     *
+     * @param Boardy\Models\Users $user User model
+     */
+    public static function login($user)
+    {
+        $user->last_login_at = currentDate();
+        $user->save();
+
+        Session::set('userId', $user->id);
     }
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Boardy\Models;
 
-use Boardy\Services\Hash\Hash;
+use Boardy\Services\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
