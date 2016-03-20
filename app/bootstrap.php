@@ -18,6 +18,8 @@ use Boardy\Services;
 class Boardy extends Application {
     use Application\FormTrait;
     use Application\UrlGeneratorTrait;
+
+    const VERSION = '1.0.0';
 }
 
 $app = new Boardy();

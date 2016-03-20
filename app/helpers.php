@@ -13,6 +13,16 @@ use Symfony\Component\Form\FormError;
 use Boardy\Services\Csrf;
 
 /**
+ * Get installed Boardy version
+ *
+ * @return string
+ */
+function getBoardyVersion()
+{
+    return Boardy::VERSION;
+}
+
+/**
  * Returns current date, useful for database storage
  *
  * @return string
