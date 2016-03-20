@@ -30,7 +30,7 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
                 return $app['assets']->get($path);
             }));
 
-            $twig->addFunction(new \Twig_SimpleFunction('config', function ($key, $default = null) use ($app) {
+            $twig->addFunction(new \Twig_SimpleFunction('config', function ($key, $default = null) {
                 return Config::get($key, $default);
             }));
 

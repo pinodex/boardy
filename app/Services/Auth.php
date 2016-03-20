@@ -15,7 +15,6 @@ use Boardy\Services\Session\Session;
 use Boardy\Services\Service;
 use Boardy\Services\Hash;
 use Boardy\Models\Users;
-use Silex\Application;
 
 class Auth extends Service
 {
@@ -77,7 +76,7 @@ class Auth extends Service
      */
     public static function guest()
     {
-        return self::user() == null;
+        return self::user() === null;
     }
 
     /**

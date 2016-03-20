@@ -10,6 +10,7 @@
  */
 
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\Form;
 use Boardy\Services\Csrf;
 
 /**
@@ -35,10 +36,10 @@ function currentDate()
 /**
  * Add form error from flashbag
  *
- * @param Symfony\Component\Form\Form $form Form
+ * @param Form $form Form
  * @param array $errors Array of string of errors
  */
-function handleFormErrors($form, $errors)
+function handleFormErrors(Form $form, $errors)
 {
     foreach ($errors as $error) {
         $form->addError(new FormError($error));
