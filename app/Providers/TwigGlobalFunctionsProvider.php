@@ -25,12 +25,12 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app->extend('twig', function(\Twig_Environment $twig, Application $app) {
-            $twig->addFunction(new \Twig_SimpleFunction('asset', function($path) use ($app) {
+        $app->extend('twig', function (\Twig_Environment $twig, Application $app) {
+            $twig->addFunction(new \Twig_SimpleFunction('asset', function ($path) use ($app) {
                 return $app['assets']->get($path);
             }));
 
-            $twig->addFunction(new \Twig_SimpleFunction('config', function($key, $default = null) use ($app) {
+            $twig->addFunction(new \Twig_SimpleFunction('config', function ($key, $default = null) use ($app) {
                 return Config::get($key, $default);
             }));
 
@@ -45,7 +45,7 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        $app->extend('twig', function(\Twig_Environment $twig, Application $app) {
+        $app->extend('twig', function (\Twig_Environment $twig, Application $app) {
             $twig->addGlobal('app', null);
             $twig->addGlobal('forum_name', Config::get('forum_name', 'Boardy Forums'));
             $twig->addGlobal('current_user', Auth::user());

@@ -26,7 +26,7 @@ class IlluminateDatabaseServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['database'] = $app->share(function() use ($app) {
+        $app['database'] = $app->share(function () use ($app) {
             $capsule = new Capsule();
 
             $capsule->addConnection($app['database.connection']);

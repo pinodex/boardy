@@ -45,7 +45,7 @@ class AssetsServiceProvider implements ServiceProviderInterface
 
             // Add our debug route to directly serve files
             // from the theme assets directory.
-            $app->get($app['assets.options']['debug_base'] . '{path}', function($path) {
+            $app->get($app['assets.options']['debug_base'] . '{path}', function ($path) {
                 return $this->serveFile($path);
             })->assert('path', '.+');
         }
@@ -58,7 +58,7 @@ class AssetsServiceProvider implements ServiceProviderInterface
             ]);
         }
 
-        $app['assets'] = $app->share(function() use ($publicBase) {
+        $app['assets'] = $app->share(function () use ($publicBase) {
             return new PublicAssets($publicBase);
         });
     }

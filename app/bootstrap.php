@@ -54,7 +54,7 @@ if ($app['debug']) {
  */
 $app['database'];
 
-$app['session.storage.handler'] = $app->share(function() use ($app) {
+$app['session.storage.handler'] = $app->share(function () use ($app) {
     return new Services\Session\IlluminateDatabaseSessionHandler(
         $app['database'],
         $app['session.storage.handler.options']

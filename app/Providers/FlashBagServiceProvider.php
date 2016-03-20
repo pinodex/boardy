@@ -23,7 +23,7 @@ class FlashBagServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app['flashbag'] = $app->share(function() use ($app) {
+        $app['flashbag'] = $app->share(function () use ($app) {
             return $app['session']->getFlashBag();
         });
     }
