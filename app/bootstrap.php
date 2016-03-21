@@ -65,8 +65,11 @@ $app['session.storage.handler'] = $app->share(function () use ($app) {
     );
 });
 
+$app['flashbag'] = $app->share(function () use ($app) {
+    return $app['session']->getFlashBag();
+});
+
 $app->register(new Providers\TwigGlobalFunctionsProvider());
-$app->register(new Providers\FlashBagServiceProvider());
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
