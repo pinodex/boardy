@@ -35,6 +35,8 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
 
 require ROOT . 'config/app.php';
 
+error_reporting(0);
+
 Debug\ErrorHandler::register();
 Debug\ExceptionHandler::register(
     $app['debug']
