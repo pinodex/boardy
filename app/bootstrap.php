@@ -14,6 +14,9 @@ use Silex\Application;
 use Silex\Provider;
 use Boardy\Providers;
 use Boardy\Services;
+use Boardy\Services\Service;
+use Boardy\Services\Config;
+use Boardy\Services\Extension\ExtensionLoader;
 
 class Boardy extends Application {
     use Application\FormTrait;
@@ -74,10 +77,12 @@ $app->register(new Providers\TwigGlobalFunctionsProvider());
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
 $app['twig.loader.filesystem']->addPath($app['theme.path'] . '/views', 'theme');
 
-Services\Service::setApp($app);
-Services\Config::load();
+Service::setApp($app);
+Config::load();
 
 require 'routes.php';
 require 'helpers.php';
+
+ExtensionLoader::load();
 
 return $app;
