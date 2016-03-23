@@ -1,12 +1,9 @@
 <?php 
 
 use Boardy\Services\Extension\Extension;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Boardy\Services\Extension\ExtensionInterface;
 
-class SampleExtension extends Extension
+class SampleExtension extends Extension implements ExtensionInterface
 {
     protected $name            = 'Sample Extension';
     protected $author          = 'Raphael Marco';
@@ -25,6 +22,6 @@ class SampleExtension extends Extension
 
     public function load()
     {
-        
+
     }
 }
