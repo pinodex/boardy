@@ -12,7 +12,6 @@
 namespace Boardy\Services;
 
 use Boardy\Services\Session\Session;
-use Boardy\Services\Service;
 use Boardy\Services\Hash;
 use Boardy\Models\Users;
 

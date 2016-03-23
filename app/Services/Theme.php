@@ -11,8 +11,6 @@
 
 namespace Boardy\Services;
 
-use Boardy\Services\Service;
-
 class Theme extends Service
 {
     /**

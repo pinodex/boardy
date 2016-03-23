@@ -11,7 +11,6 @@
 
 namespace Boardy\Services;
 
-use Boardy\Services\Service;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
 class Csrf extends Service

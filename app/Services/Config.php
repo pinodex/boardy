@@ -11,7 +11,6 @@
 
 namespace Boardy\Services;
 
-use Boardy\Services\Service;
 use Boardy\Models\Configurations;
 
 class Config extends Service
