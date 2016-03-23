@@ -41,7 +41,7 @@ class ExtensionLoader
                     $entryClass = new $extension;
                     $entryClass->load();
 
-                    $loadedExtensions[] = $extension;
+                    self::$loadedExtensions[] = $extension;
                 }
             }
         }
