@@ -12,6 +12,7 @@
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\Form;
 use Boardy\Services\Csrf;
+use Boardy\Services\Event\EventDispatcher;
 
 /**
  * Get installed Boardy version
@@ -47,7 +48,7 @@ function handleFormErrors(Form $form, $errors)
 }
 
 /**
- * Shortcut to Boardy\Services\Csrf::isValid. Checks if token is valid for the identifier.
+ * Shortcut to Csrf::isValid. Checks if token is valid for the identifier.
  *
  * @param string $identifier Token identifier
  * @param string $token Token string
@@ -57,4 +58,16 @@ function handleFormErrors(Form $form, $errors)
 function isCsrfTokenValid($identifier, $token)
 {
     return Csrf::isValid($identifier, $token);
+}
+
+/**
+ * Shortcut to EventDispatcher::dispatch
+ * Dispatch event
+ *
+ * @param string $eventName Event name
+ * @param Symfony\Component\EventDispatcher\Event $event Event
+ */
+function dispatchEvent($eventName, $event)
+{
+    EventDispatcher::dispatch($eventName, $event);
 }
