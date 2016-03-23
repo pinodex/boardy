@@ -12,6 +12,7 @@
 namespace Boardy\Services;
 
 use Boardy\Services\Session\Session;
+use Boardy\Services\Event\Event;
 use Boardy\Services\Hash;
 use Boardy\Models\Users;
 
@@ -32,15 +33,27 @@ class Auth extends Service
      */
     public static function attempt($data, $password = null)
     {
+        dispatchEvent('auth.attempt', new Event(func_get_args()));
+
         if (is_array($data)) {
             $password = $data['password'];
             $data = $data['username'];
         }
 
         if ($user = Users::where('username', $data)->orWhere('email', $data)->first()) {
-            if (Hash::check($password, $user->password)) {
-                return $user;
+            if (!Hash::check($password, $user->password)) {
+                dispatchEvent('auth.fail', null);
+                return;
             }
+
+            if (Hash::needsRehash($user->password)) {
+                $user->password = $password;
+                $user->save();
+
+                dispatchEvent('auth.rehash', $user);
+            }
+
+            return $user;
         }
     }
 
@@ -72,7 +85,7 @@ class Auth extends Service
      */
     public static function guest()
     {
-        return self::user() === null;
+        return self::$user === null;
     }
 
     /**
@@ -86,6 +99,7 @@ class Auth extends Service
         $user->save();
 
         Session::set('userId', $user->id);
+        dispatchEvent('auth.login', new Event($user));
     }
 
     /**
@@ -94,5 +108,6 @@ class Auth extends Service
     public static function logout()
     {
         Session::remove('userId');
+        dispatchEvent('auth.logout', self::$user);
     }
 }

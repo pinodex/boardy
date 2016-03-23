@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 use Boardy\Constraints as CustomAssert;
 use Boardy\Services\Session\Session;
+use Boardy\Services\Form;
 use Boardy\Services\Theme;
 use Boardy\Services\Auth;
 use Boardy\Models\Users;
@@ -33,7 +34,7 @@ class AuthController
             'page_title' => 'Login'
         );
 
-        $form = $app->form()
+        $form = Form::create('login_form')
             ->add('username', Type\TextType::class, [
                 'data' => Session::get('lastUsername'),
                 'attr' => ['autofocus' => true]
@@ -93,7 +94,7 @@ class AuthController
             'page_title' => 'Register'
         );
 
-        $form = $app->form()
+        $form = Form::create('registration_form')
             ->add('name', Type\TextType::class)
             ->add('username', Type\TextType::class, [
                 'constraints' => [

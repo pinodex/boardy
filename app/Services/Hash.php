@@ -31,10 +31,22 @@ class Hash
      * @param string $password Source password
      * @param string $hash Hashed password
      *
-     * @return bool
+     * @return boolean
      */
     public static function check($password, $hash)
     {
         return password_verify($password, $hash);
+    }
+
+    /**
+     * Check if password needs rehash
+     *
+     * @param strig $hash Hashed password
+     *
+     * @return boolean
+     */
+    public static function needsRehash($hash)
+    {
+        return password_needs_rehash($hash, PASSWORD_BCRYPT);
     }
 }
