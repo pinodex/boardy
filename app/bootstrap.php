@@ -81,7 +81,6 @@ Service::setApp($app);
 Config::load();
 
 require 'routes.php';
-require 'helpers.php';
 
 ExtensionLoader::load();
 
