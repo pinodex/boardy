@@ -20,6 +20,7 @@ use Boardy\Services\Session\Session;
 use Boardy\Services\Form;
 use Boardy\Services\Theme;
 use Boardy\Services\Auth;
+use Boardy\Services\Csrf;
 use Boardy\Models\Users;
 
 class AuthController
@@ -48,7 +49,7 @@ class AuthController
         $form = $form->getForm();
         $form->handleRequest($request);
 
-        handleFormErrors($form, $app['flashbag']->get('formErrors'));
+        Form::handleFlashErrors($form, 'login_form');
 
         if ($form->isValid()) {
             $data = $form->getData();
@@ -57,7 +58,7 @@ class AuthController
             Session::set('lastUsername', $data['username']);
             
             if (!$user) {
-                $app['flashbag']->add('formErrors', 'Invalid username and/or password');
+                Form::flashError('login_form', 'Invalid username and/or password');
                 return $app->redirect($app->path('auth.login'));
             }
 
@@ -77,7 +78,7 @@ class AuthController
 
     public function logout(Request $request, Application $app)
     {
-        if (isCsrfTokenValid('logout', $request->query->get('token'))) {
+        if (Csrf::isValid('logout', $request->query->get('token'))) {
             Auth::logout();
         }
 
@@ -135,8 +136,6 @@ class AuthController
 
         $form = $form->getForm();
         $form->handleRequest($request);
-
-        handleFormErrors($form, $app['flashbag']->get('formErrors'));
 
         if ($form->isValid()) {
             $data = $form->getData();

@@ -13,6 +13,8 @@ namespace Boardy\Services;
 
 use Boardy\Services\Event\Event;
 use Boardy\Services\Event\EventDispatcher;
+use Symfony\Component\Form\Form as SymfonyForm;
+use Symfony\Component\Form\FormError;
 
 class Form extends Service
 {
@@ -38,6 +40,20 @@ class Form extends Service
         );
 
         return $form;
+    }
+
+    public static function flashError($identifier, $message)
+    {
+        self::$app['flashbag']->add('form.' . $identifier . '.errors', $message);
+    }
+
+    public static function handleFlashErrors(SymfonyForm $form, $identifier)
+    {
+        $errors = self::$app['flashbag']->get('form.' . $identifier . '.errors');
+
+        foreach ($errors as $error) {
+            $form->addError(new FormError($error));
+        }
     }
 
     /**

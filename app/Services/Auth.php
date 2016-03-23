@@ -11,6 +11,7 @@
 
 namespace Boardy\Services;
 
+use Boardy\Services\Event\EventDispatcher;
 use Boardy\Services\Session\Session;
 use Boardy\Services\Event\Event;
 use Boardy\Services\Hash;
@@ -33,7 +34,7 @@ class Auth extends Service
      */
     public static function attempt($data, $password = null)
     {
-        dispatchEvent('auth.attempt', new Event(func_get_args()));
+        EventDispatcher::dispatch('auth.attempt', new Event(func_get_args()));
 
         if (is_array($data)) {
             $password = $data['password'];
@@ -42,7 +43,7 @@ class Auth extends Service
 
         if ($user = Users::where('username', $data)->orWhere('email', $data)->first()) {
             if (!Hash::check($password, $user->password)) {
-                dispatchEvent('auth.fail', null);
+                EventDispatcher::dispatch('auth.fail', null);
                 return;
             }
 
@@ -50,7 +51,7 @@ class Auth extends Service
                 $user->password = $password;
                 $user->save();
 
-                dispatchEvent('auth.rehash', $user);
+                EventDispatcher::dispatch('auth.rehash', $user);
             }
 
             return $user;
@@ -95,11 +96,11 @@ class Auth extends Service
      */
     public static function login($user)
     {
-        $user->last_login_at = currentDate();
+        $user->last_login_at = date('Y-m-d H:i:s');
         $user->save();
 
         Session::set('userId', $user->id);
-        dispatchEvent('auth.login', new Event($user));
+        EventDispatcher::dispatch('auth.login', new Event($user));
     }
 
     /**
@@ -108,6 +109,6 @@ class Auth extends Service
     public static function logout()
     {
         Session::remove('userId');
-        dispatchEvent('auth.logout', self::$user);
+        EventDispatcher::dispatch('auth.logout', self::$user);
     }
 }
