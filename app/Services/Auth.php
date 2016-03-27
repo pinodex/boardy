@@ -15,12 +15,12 @@ use Boardy\Services\Event\EventDispatcher;
 use Boardy\Services\Session\Session;
 use Boardy\Services\Event\Event;
 use Boardy\Services\Hash;
-use Boardy\Models\Users;
+use Boardy\Models\User;
 
 class Auth extends Service
 {
     /**
-     * @var Boardy\Models\Users Current logged in user. Used to cache user model for single request.
+     * @var Boardy\Models\User Current logged in user. Used to cache user model for single request.
      */
     private static $user;
 
@@ -30,7 +30,7 @@ class Auth extends Service
      * @param string|array $data Username or array of username and password
      * @param string $password Password
      *
-     * @return Boardy\Models\Users
+     * @return Boardy\Models\User
      */
     public static function attempt($data, $password = null)
     {
@@ -41,7 +41,7 @@ class Auth extends Service
             $data = $data['username'];
         }
 
-        if ($user = Users::where('username', $data)->orWhere('email', $data)->first()) {
+        if ($user = User::where('username', $data)->orWhere('email', $data)->first()) {
             if (!Hash::check($password, $user->password)) {
                 EventDispatcher::dispatch('auth.fail', null);
                 return;
@@ -61,7 +61,7 @@ class Auth extends Service
     /**
      * Get logged in user
      *
-     * @return Boardy\Models\Users
+     * @return Boardy\Models\User
      */
     public static function user()
     {
@@ -70,7 +70,7 @@ class Auth extends Service
         }
 
         if ($userId = Session::get('userId')) {
-            if ($user = Users::find($userId)) {
+            if ($user = User::find($userId)) {
                 $user->touch();
 
                 self::$user = $user;
@@ -92,7 +92,7 @@ class Auth extends Service
     /**
      * Login user
      *
-     * @param Boardy\Models\Users $user User model
+     * @param Boardy\Models\User $user User model
      */
     public static function login($user)
     {

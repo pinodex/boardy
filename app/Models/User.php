@@ -15,15 +15,10 @@ use Boardy\Services\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Users extends Model
+class User extends Model
 {
     use SoftDeletes;
-
-    /**
-     * {@inheritDoc}
-     */
-    protected $table = 'users';
-
+    
     /**
      * {@inheritDoc}
      */

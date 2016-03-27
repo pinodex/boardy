@@ -13,13 +13,8 @@ namespace Boardy\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sessions extends Model
+class Session extends Model
 {
-    /**
-     * {@inheritDoc}
-     */
-    protected $table = 'sessions';
-
     /**
      * {@inheritDoc}
      */

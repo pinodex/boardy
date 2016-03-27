@@ -11,7 +11,7 @@
 
 namespace Boardy\Services;
 
-use Boardy\Models\Configurations;
+use Boardy\Models\Configuration;
 
 class Config extends Service
 {
@@ -25,7 +25,7 @@ class Config extends Service
      */
     public static function load()
     {
-        $entries = Configurations::get();
+        $entries = Configuration::get();
         
         foreach ($entries as $entry) {
             self::$config[$entry->id] = unserialize($entry->value);
@@ -59,15 +59,15 @@ class Config extends Service
     {
         self::$config[$id] = $value;
 
-        if (Configurations::where('id', $id)->exists()) {
-            Configurations::where('id', $id)->update([
+        if (Configuration::where('id', $id)->exists()) {
+            Configuration::where('id', $id)->update([
                 'value' => serialize($value)
             ]);
 
             return;
         }
 
-        Configurations::insert([
+        Configuration::insert([
             'id' => $id,
             'value' => serialize($value)
         ]);
@@ -80,7 +80,7 @@ class Config extends Service
      */
     public static function remove($id)
     {
-        if ($value = Configurations::find($id)) {
+        if ($value = Configuration::find($id)) {
             $value->delete();
             unset(self::$config[$id]);
         }

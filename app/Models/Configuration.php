@@ -13,13 +13,8 @@ namespace Boardy\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Configurations extends Model
+class Configuration extends Model
 {
-    /**
-     * {@inheritDoc}
-     */
-    protected $table = 'configurations';
-
     /**
      * {@inheritDoc}
      */

@@ -21,7 +21,7 @@ use Boardy\Services\Form;
 use Boardy\Services\Theme;
 use Boardy\Services\Auth;
 use Boardy\Services\Csrf;
-use Boardy\Models\Users;
+use Boardy\Models\User;
 
 class AuthController
 {
@@ -105,7 +105,7 @@ class AuthController
                         'message'   => 'Username must only contain alphanumeric characters and underscores.'
                     ]),
                     new CustomAssert\UniqueRecord([
-                        'model'     => Users::class,
+                        'model'     => User::class,
                         'row'       => 'username',
                         'message'   => 'Username already in use.'
                     ])
@@ -115,7 +115,7 @@ class AuthController
                 'constraints' => [
                     new Assert\Email(),
                     new CustomAssert\UniqueRecord([
-                        'model'     => Users::class,
+                        'model'     => User::class,
                         'row'       => 'email',
                         'message'   => 'Email already in use.'
                     ])
@@ -140,7 +140,7 @@ class AuthController
         if ($form->isValid()) {
             $data = $form->getData();
             
-            $user = Users::create($data);
+            $user = User::create($data);
             Auth::login($user);
             
             return $app->redirect($app->path('site.index'));
