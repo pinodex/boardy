@@ -44,4 +44,13 @@ class User extends Model
         $this->attributes['password'] = Hash::make($password);
     }
 
+    /**
+     * Get user posts
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'author');
+    }
 }
