@@ -21,12 +21,12 @@ class Configurations extends Model
     protected $table = 'configurations';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $timestamps = false;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $incrementing = false;
 }

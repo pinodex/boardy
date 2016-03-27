@@ -21,7 +21,7 @@ class Sessions extends Model
     protected $table = 'sessions';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $timestamps = false;
 }

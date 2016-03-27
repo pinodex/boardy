@@ -52,7 +52,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function open($savePath, $sessionName)
     {
@@ -60,7 +60,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function close()
     {
@@ -73,7 +73,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function read($id)
     {
@@ -83,7 +83,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function write($id, $data)
     {
@@ -106,7 +106,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function gc($maxLifeTime)
     {
@@ -116,7 +116,7 @@ class IlluminateDatabaseSessionHandler implements \SessionHandlerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function destroy($id)
     {

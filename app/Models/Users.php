@@ -25,17 +25,17 @@ class Users extends Model
     protected $table = 'users';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected $dates = ['deleted_at'];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected $fillable = ['name', 'username', 'email', 'password'];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected $hidden = ['password'];
 
