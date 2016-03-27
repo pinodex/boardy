@@ -15,7 +15,7 @@ use Boardy\Services\Event\EventDispatcher;
 use Boardy\Services\Form;
 use Boardy\Services\Theme;
 
-class Extension
+class Extension implements ExtensionInterface
 {
     /**
      * @var string Extension name
@@ -36,6 +36,31 @@ class Extension
      * @var string Extension required Boardy version
      */
     protected $boardyVersion;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function activate()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function deactivate()
+    {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function load()
+    {
+        return;
+    }
+
     /**
      * Get extension name
      *
