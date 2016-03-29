@@ -19,10 +19,6 @@ class MainController
 {
     public function index(Request $request, Application $app)
     {
-        $vars = array(
-            'page_title' => 'Home'
-        );
-
-        return Theme::view('index', $vars);
+        return Theme::view('index');
     }
 }

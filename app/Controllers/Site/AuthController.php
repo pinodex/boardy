@@ -31,9 +31,7 @@ class AuthController
             return $app->redirect($app->path('site.index'));
         }
 
-        $vars = array(
-            'page_title' => 'Login'
-        );
+        $vars = array();
 
         $form = Form::create('login_form')
             ->add('username', Type\TextType::class, [
@@ -91,9 +89,7 @@ class AuthController
             return $app->redirect($app->path('site.index'));
         }
 
-        $vars = array(
-            'page_title' => 'Register'
-        );
+        $vars = array();
 
         $form = Form::create('registration_form')
             ->add('name', Type\TextType::class)
