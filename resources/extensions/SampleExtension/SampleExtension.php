@@ -1,7 +1,6 @@
 <?php 
 
 use Boardy\Services\Extension\Extension;
-use Boardy\Services\Extension\ExtensionInterface;
 
 class SampleExtension extends Extension
 {
