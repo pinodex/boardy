@@ -53,4 +53,14 @@ class User extends Model
     {
         return $this->hasMany(Post::class, 'author_id');
     }
+
+    /**
+     * Get user groups
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'user_groups');
+    }
 }

@@ -49,4 +49,14 @@ class Board extends Model
     {
         return $this->hasMany(Board::class, 'parent_id');
     }
+
+    /**
+     * Get board groups
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'board_groups');
+    }
 }
