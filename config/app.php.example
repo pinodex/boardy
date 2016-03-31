@@ -17,6 +17,11 @@
 $app['debug'] = true;
 
 /*
+ * Enforce https
+ */
+$app['https'] = true;
+
+/*
  * Theme
  */
 $app['theme.name'] = 'default';
@@ -60,7 +65,8 @@ $app['database.connection'] = array(
     'username'  => 'boardy',
     'password'  => 'password',
     'charset'   => 'utf8',
-    'collation' => 'utf8_unicode_ci'
+    'collation' => 'utf8_unicode_ci',
+    'logging'   => false
 );
 
 /*

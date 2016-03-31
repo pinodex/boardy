@@ -32,6 +32,12 @@ class IlluminateDatabaseServiceProvider implements ServiceProviderInterface
             $capsule->addConnection($app['database.connection']);
             $capsule->setEventDispatcher(new Dispatcher(new Container()));
 
+            if (isset($app['database.connection']['logging']) && 
+                $app['database.connection']['logging'] === true) {
+                
+                $capsule->getConnection()->enableQueryLog();
+            }
+
             $capsule->setAsGlobal();
             $capsule->bootEloquent();
 
