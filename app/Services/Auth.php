@@ -14,7 +14,9 @@ namespace Boardy\Services;
 use Boardy\Services\Event\EventDispatcher;
 use Boardy\Services\Session\Session;
 use Boardy\Services\Event\Event;
+use Boardy\Services\Config;
 use Boardy\Services\Hash;
+use Boardy\Models\Group;
 use Boardy\Models\User;
 
 class Auth extends Service
@@ -87,6 +89,22 @@ class Auth extends Service
     public static function guest()
     {
         return self::$user === null;
+    }
+
+    /**
+     * Get the groups the current user belong to
+     * 
+     * @return array
+     */
+    public static function groups()
+    {
+        $groupIds = [Config::get('guest_group_id', 0)];
+
+        if ($user = self::user()) {
+            $groupIds = $user->groups->pluck('id')->all();
+        }
+
+        return Group::whereIn('id', $groupIds)->with('boards')->get();
     }
 
     /**

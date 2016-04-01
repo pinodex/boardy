@@ -6,15 +6,13 @@
         {{ code|raw }}
     {% endfor %}
     <title>{{ page_title }} - {{ forum_name }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/normalize.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/global.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}" />
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 </head>
 <body>
     <div class="top-bar">
-        <div class="container-fluid">
+        <div class="container">
             <button class="toggle neutral">Menu</button>
             <span class="title">{{ forum_name }}</span>
             <nav>

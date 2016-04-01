@@ -12,6 +12,8 @@
 namespace Boardy\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Boardy\Services\Auth;
 
 class Board extends Model
 {
@@ -58,5 +60,32 @@ class Board extends Model
     public function groups()
     {
         return $this->belongsToMany(Group::class, 'board_groups');
+    }
+
+    /**
+     * Get board by slug.
+     * This also checks for the current user and returns null
+     * if it has no permissions to access or not found.
+     * 
+     * @param string $slug Board slug
+     * 
+     * @return
+     */
+    public static function bySlug($slug)
+    {
+        $board = self::where('slug', $slug)->firstOrFail();
+        $hasAccess = false;
+
+        $board->groups->each(function ($item) use (&$hasAccess) {
+            if (Auth::groups()->contains($item)) {
+                $hasAccess = true;
+            }
+        });
+
+        if (!$hasAccess) {
+            throw new AccessDeniedException();
+        }
+
+        return $board;
     }
 }

@@ -13,6 +13,7 @@ namespace Boardy\Providers;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Boardy\Services\TemplateModel;
 use Boardy\Services\Config;
 use Boardy\Services\Auth;
 
@@ -32,6 +33,10 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
 
             $twig->addFunction(new \Twig_SimpleFunction('config', function ($key, $default = null) {
                 return Config::get($key, $default);
+            }));
+
+            $twig->addFunction(new \Twig_SimpleFunction('model', function ($name) {
+                return call_user_func([TemplateModel::class, $name]);
             }));
 
             return $twig;

@@ -1,13 +1,65 @@
 {% extends '@theme/main.html' %}
 
 {% set page_title = 'Home' %}
+{% set posts = model('post') %}
+{% set boards = model('board') %}
 
 {% block content %}
-    <div class="background info">
-        <div class="container-fluid">
-            <h1>Welcome to {{ forum_name }}!</h1>
-            <p>This is a sample message. Edit <code>resources/themes/default/views/index.html</code> to change or remove this message.</p>
-            <br />
+    <div class="after-nav container">
+        <div class="row">
+            <div class="column-12">
+                <ul class="tablets">
+                    <li{{ (current_board_slug is not defined ) ? ' class="active"' : ''}}>
+                        <a href="{{ path('site.index') }}">All Discussions</a>
+                    </li>
+                    {% for board in boards %}
+                        <li{{ (current_board_slug is defined and current_board_slug == board.slug) ? ' class="active"' : '' }}>
+                            <a href="{{ path('site.board.browse', {slug: board.slug}) }}">{{ board.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column-8">
+                <div class="panel">
+                    <div class="header">
+                        <h1>Discussions</h1>
+                    </div>
+                    <div class="content">
+                        <div class="item-list">
+                            {% for post in posts %}
+                                <div class="item">
+                                    <div class="right">
+                                        <div class="capsule">
+                                            <span class="background info">
+                                                <a href="#">{{ post.board.name }}</a>
+                                            </span>
+                                            <span class="background neutral">
+                                                <a href="#">@{{ post.author.username }}</a>
+                                            </span>
+                                        </div>
+                                        <div style="text-align: right;">
+                                            <small>{{ post.created_at|date('M d, h:i a') }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="icon">{{ post.title|first|upper }}</div>
+                                    <div class="icon-after">
+                                        <h1><a href="#">{{ post.title }}</a></h1>
+                                        <p>{{ post.excerpt }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>Nothing to see here.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column-4">
+                <h1>Test Only</h1>
+            </div>
         </div>
     </div>
 {% endblock %}
