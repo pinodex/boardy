@@ -31,7 +31,7 @@ class ExtensionLoader
     public static function load()
     {
         self::$base = ROOT . 'resources/extensions';
-        $extensions = Config::get('activatedExtensions', []);
+        $extensions = Config::get('activated_extensions', []);
 
         foreach ($extensions as $extension) {
             if ($entryFile = self::getEntryFile($extension)) {
