@@ -13,15 +13,17 @@ namespace Boardy\Routes\Site;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
+use Boardy\Controllers\Site\AuthController;
 
 class AuthRoute implements ControllerProviderInterface
 {
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->match('/login', 'Boardy\Controllers\Site\AuthController::login')->bind('auth.login');
-        $controller->get('/logout', 'Boardy\Controllers\Site\AuthController::logout')->bind('auth.logout');
-        $controller->match('/register', 'Boardy\Controllers\Site\AuthController::register')->bind('auth.register');
+        
+        $controller->match('/login',    [AuthController::class, 'login'])->bind('auth.login');
+        $controller->get  ('/logout',   [AuthController::class, 'logout'])->bind('auth.logout');
+        $controller->match('/register', [AuthController::class, 'register'])->bind('auth.register');
 
         if ($app['https']) {
             $controller->requireHttps();

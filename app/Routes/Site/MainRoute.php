@@ -13,13 +13,14 @@ namespace Boardy\Routes\Site;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
+use Boardy\Controllers\Site\MainController;
 
 class MainRoute implements ControllerProviderInterface
 {
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', 'Boardy\Controllers\Site\MainController::index')->bind('site.index');
+        $controller->get('/', [MainController::class, 'index'])->bind('site.index');
         
         return $controller;
     }
