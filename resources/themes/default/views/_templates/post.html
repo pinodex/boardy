@@ -1,0 +1,12 @@
+<div class="post">
+    <div class="avatar"></div>
+    <div class="content">
+        <div class="meta">
+            <p><a href="#">{{ post.author.username }}</a></p>
+            <p><small>{{ post.created_at|date('M d, h:i a') }}</small></p>
+        </div>
+        <div class="html">
+            {{ post.html|raw }}
+        </div>
+    </div>
+</div>

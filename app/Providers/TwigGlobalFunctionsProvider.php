@@ -35,8 +35,10 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
                 return Config::get($key, $default);
             }));
 
-            $twig->addFunction(new \Twig_SimpleFunction('model', function ($name) {
-                return call_user_func([TemplateModel::class, $name]);
+            $twig->addFunction(new \Twig_SimpleFunction('model', function () {
+                $args = func_get_args();
+
+                return call_user_func_array([TemplateModel::class, array_shift($args)], $args);
             }));
 
             return $twig;

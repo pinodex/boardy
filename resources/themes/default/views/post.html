@@ -1,0 +1,26 @@
+{% extends '@theme/main.html' %}
+
+{% set page_title = post.title %}
+
+{% block content %}
+    <div class="after-nav container">
+        <div class="row">
+            <div class="column-9">
+                <div class="panel">
+                    <div class="header">
+                        <h1>{{ post.title }}</h1>
+                    </div>
+                    <div class="content">
+                        <div class="post-list">
+                            {% include '@theme/_templates/post.html' with {'post': post} %}
+                            
+                            {% for child in post.children %}
+                                {% include '@theme/_templates/post.html' with {'post': child} %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

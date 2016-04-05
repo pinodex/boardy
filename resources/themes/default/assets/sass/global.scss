@@ -29,10 +29,6 @@ html body {
     overflow-y: scroll;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 100;
-}
-
 .container {
     padding-left: 15px;
     padding-right: 15px;
@@ -218,6 +214,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .neutral {
     color: $black-50;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
 }
 
 a {
@@ -468,6 +468,12 @@ form .alert {
     }
 }
 
+.divider {
+    border-top: 1px solid #eee;
+    margin: 10px 0;
+    height: 1px;
+}
+
 .window {
     & > h2 {
         font-size: 16px;
@@ -529,21 +535,21 @@ ul {
 
             a {
                 display: inline-block;
-                background: $black-10;
+                border-bottom: 2px solid $brand-primary;
                 padding: 7px 15px;
                 color: #000;
                 text-decoration: none;
-                @include transition(linear all 50ms);
 
                 &:hover {
-                    background: $black-40;
-                    color: #fff;
+                    border-color: $brand-primary-hover;
+                    color: $brand-primary-hover;
                 }
             }
         }
 
         li.active a {
-            background: $black-70;
+            background: $brand-primary;
+            border-color: $brand-primary-hover;
             color: #fff;
         }
 
@@ -587,6 +593,55 @@ ul {
 
         p {
             margin: 0;
+        }
+    }
+}
+
+.post-list {
+    .post + .post {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .post {
+        overflow: hidden;;
+
+        .avatar {
+            display: inline-block;
+            background: $black-10;
+            float: left;
+            height: 64px;
+            width: 64px;
+        }
+
+        .content {
+            margin-left: 80px;
+
+            .meta p {
+                font-size: 16px;
+                margin: 0;
+
+                small {
+                    font-size: 12px;
+                }
+            }
+
+            .html {
+                margin-top: 15px;
+
+                h1, h2, h3, h4, h5, h6 {
+                    font-weight: 100;
+                }
+
+                & > *:first-child {
+                    margin-top: 0;
+                }
+
+                & > *:last-child {
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }

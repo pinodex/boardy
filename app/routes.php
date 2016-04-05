@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 $app->mount('/', new Routes\Site\MainRoute);
 $app->mount('/b', new Routes\Site\BoardRoute);
+$app->mount('/p', new Routes\Site\PostRoute);
 $app->mount('/auth', new Routes\Site\AuthRoute);
 
 $app->mount('/api', new Routes\Api\MainRoute);

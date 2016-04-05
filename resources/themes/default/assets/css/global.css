@@ -384,10 +384,6 @@ html body {
   overflow-y: scroll;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 100;
-}
-
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -798,6 +794,10 @@ h1, h2, h3, h4, h5, h6 {
   color: gray;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
 a {
   color: #2196f3;
   text-decoration: none;
@@ -1004,6 +1004,12 @@ form .alert {
   right: 20px;
 }
 
+.divider {
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+  height: 1px;
+}
+
 .window > h2 {
   font-size: 16px;
   padding: 15px;
@@ -1053,21 +1059,18 @@ ul.tablets li {
 }
 ul.tablets li a {
   display: inline-block;
-  background: #e6e6e6;
+  border-bottom: 2px solid #428bca;
   padding: 7px 15px;
   color: #000;
   text-decoration: none;
-  -webkit-transition: linear all 50ms;
-  -moz-transition: linear all 50ms;
-  -o-transition: linear all 50ms;
-  transition: linear all 50ms;
 }
 ul.tablets li a:hover {
-  background: #999999;
-  color: #fff;
+  border-color: #3071a9;
+  color: #3071a9;
 }
 ul.tablets li.active a {
-  background: #4d4d4d;
+  background: #428bca;
+  border-color: #3071a9;
   color: #fff;
 }
 ul.tablets li + li {
@@ -1102,6 +1105,44 @@ ul.tablets li + li {
 }
 .item-list .item p {
   margin: 0;
+}
+
+.post-list .post + .post {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+.post-list .post {
+  overflow: hidden;
+}
+.post-list .post .avatar {
+  display: inline-block;
+  background: #e6e6e6;
+  float: left;
+  height: 64px;
+  width: 64px;
+}
+.post-list .post .content {
+  margin-left: 80px;
+}
+.post-list .post .content .meta p {
+  font-size: 16px;
+  margin: 0;
+}
+.post-list .post .content .meta p small {
+  font-size: 12px;
+}
+.post-list .post .content .html {
+  margin-top: 15px;
+}
+.post-list .post .content .html h1, .post-list .post .content .html h2, .post-list .post .content .html h3, .post-list .post .content .html h4, .post-list .post .content .html h5, .post-list .post .content .html h6 {
+  font-weight: 100;
+}
+.post-list .post .content .html > *:first-child {
+  margin-top: 0;
+}
+.post-list .post .content .html > *:last-child {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=global.css.map */

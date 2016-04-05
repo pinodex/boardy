@@ -62,6 +62,19 @@ class Board extends Model
         return $this->belongsToMany(Group::class, 'board_groups');
     }
 
+    public function userHasAccess()
+    {
+        $hasAccess = false;
+
+        Auth::groups()->each(function ($item) use (&$hasAccess) {
+            if ($this->groups->contains($item)) {
+                $hasAccess = true;
+            }
+        });
+
+        return $hasAccess;
+    }
+
     /**
      * Get board by slug.
      * This also checks for the current user and returns null
@@ -69,20 +82,13 @@ class Board extends Model
      * 
      * @param string $slug Board slug
      * 
-     * @return
+     * @return self
      */
     public static function bySlug($slug)
     {
         $board = self::where('slug', $slug)->firstOrFail();
-        $hasAccess = false;
 
-        $board->groups->each(function ($item) use (&$hasAccess) {
-            if (Auth::groups()->contains($item)) {
-                $hasAccess = true;
-            }
-        });
-
-        if (!$hasAccess) {
+        if (!$board->userHasAccess()) {
             throw new AccessDeniedException();
         }
 

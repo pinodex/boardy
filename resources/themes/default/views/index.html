@@ -1,19 +1,24 @@
 {% extends '@theme/main.html' %}
 
 {% set page_title = 'Home' %}
-{% set posts = model('post') %}
-{% set boards = model('board') %}
+
+{% set boards = model('boards') %}
+{% set posts = model('posts', boards) %}
+
+{% if current_board is defined %}
+    {% set posts = model('posts', [current_board]) %}
+{% endif %}
 
 {% block content %}
     <div class="after-nav container">
         <div class="row">
             <div class="column-12">
                 <ul class="tablets">
-                    <li{{ (current_board_slug is not defined ) ? ' class="active"' : ''}}>
+                    <li{{ (current_board is not defined ) ? ' class="active"' : ''}}>
                         <a href="{{ path('site.index') }}">All Discussions</a>
                     </li>
                     {% for board in boards %}
-                        <li{{ (current_board_slug is defined and current_board_slug == board.slug) ? ' class="active"' : '' }}>
+                        <li{{ (current_board is defined and current_board.slug == board.slug) ? ' class="active"' : '' }}>
                             <a href="{{ path('site.board.browse', {slug: board.slug}) }}">{{ board.name }}</a>
                         </li>
                     {% endfor %}
@@ -22,10 +27,10 @@
         </div>
 
         <div class="row">
-            <div class="column-8">
+            <div class="column-12">
                 <div class="panel">
                     <div class="header">
-                        <h1>Discussions</h1>
+                        <h1>{{ (current_board is defined) ? current_board.name : 'All Discussions' }}</h1>
                     </div>
                     <div class="content">
                         <div class="item-list">
@@ -34,7 +39,7 @@
                                     <div class="right">
                                         <div class="capsule">
                                             <span class="background info">
-                                                <a href="#">{{ post.board.name }}</a>
+                                                <a href="{{ path('site.board.browse', {slug: post.board.slug}) }}">{{ post.board.name }}</a>
                                             </span>
                                             <span class="background neutral">
                                                 <a href="#">@{{ post.author.username }}</a>
@@ -46,7 +51,7 @@
                                     </div>
                                     <div class="icon">{{ post.title|first|upper }}</div>
                                     <div class="icon-after">
-                                        <h1><a href="#">{{ post.title }}</a></h1>
+                                        <h1><a href="{{ path('site.post.read', {id: post.id, slug: post.slug}) }}">{{ post.title }}</a></h1>
                                         <p>{{ post.excerpt }}</p>
                                     </div>
                                 </div>
@@ -56,9 +61,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="column-4">
-                <h1>Test Only</h1>
             </div>
         </div>
     </div>

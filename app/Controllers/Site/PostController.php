@@ -13,31 +13,38 @@ namespace Boardy\Controllers\Site;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Boardy\Services\TemplateModel;
 use Boardy\Services\Theme;
-use Boardy\Models\Board;
+use Boardy\Models\Post;
 
-class BoardController
+class PostController
 {
     public function index(Request $request, Application $app)
     {
         return $app->redirect($app->path('site.index'));
     }
 
-    public function browse(Request $request, Application $app, $slug)
+    public function read(Request $request, Application $app, $id, $slug)
     {
         try {
-            $board = Board::bySlug($slug)->toArray();
-        } catch (AccessDeniedException $e) {
-            return Theme::view('errors/access_denied');
+            $post = Post::with('author', 'children', 'children.author')->findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return Theme::view('errors/not_found');
         }
-        
-        return Theme::view('index', [
-            'current_board' => $board
+
+        if ($slug != $post->slug) {
+            return $app->redirect($app->path('site.post.read', [
+                'id'    => $id,
+                'slug'  => $post->slug
+            ]));
+        }
+
+        if (!$post->board->userHasAccess()) {
+            return Theme::view('errors/access_denied');
+        }
+
+        return Theme::view('post', [
+            'post' => $post->toArray()
         ]);
     }
 }
