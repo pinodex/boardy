@@ -1,6 +1,11 @@
 {% extends '@theme/main.html' %}
 
 {% set page_title = post.title %}
+{% set postParams = {
+        'id': post.id,
+        'slug': post.slug
+    }
+%}
 
 {% block content %}
     <div class="after-nav container">
@@ -18,6 +23,18 @@
                                 {% include '@theme/_templates/post.html' with {'post': child} %}
                             {% endfor %}
                         </div>
+                        <form class="editor" action="{{ path('site.post.reply', postParams) }}" data-preview-url="{{ path('api.markdown') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('post.' ~ post.id ~ '.reply') }}" />
+                            <div class="tabs">
+                                <button type="button" data-toggle="text" class="active">Text</button>
+                                <button type="button" data-toggle="preview">Preview</button>
+                            </div>
+                            <textarea class="text" name="content" placeholder="Write a reply&hellip;"></textarea>
+                            <div class="preview"></div>
+                            <div class="actions">
+                                <button type="submit" class="success">Post Reply</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ namespace Boardy\Routes\Api;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Boardy\Controllers\Api\MainController;
 
 class MainRoute implements ControllerProviderInterface
 {
@@ -28,7 +29,8 @@ class MainRoute implements ControllerProviderInterface
             }
         });
 
-        $controller->get('/', 'Boardy\Controllers\Api\MainController::index')->bind('api.index');
+        $controller->get('/',          [MainController::class, 'index'])->bind('api.index');
+        $controller->post('/markdown', [MainController::class, 'markdown'])->bind('api.markdown');
         
         return $controller;
     }

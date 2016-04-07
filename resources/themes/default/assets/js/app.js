@@ -40,6 +40,36 @@
         $('.dropdown').not(dropdown).removeClass('active');
     });
 
+    $('.editor .tabs button').click(function() {
+        var toggle = $(this).data('toggle');
+        var editor = $(this).parents('.editor');
+        var editorText = editor.find('.text');
+        var editorPreview = editor.find('.preview');
+
+        if (toggle == 'text') {
+            editorText.show();
+            editorPreview.hide();
+        }
+
+        if (toggle == 'preview') {
+            editorPreview.show();
+            editorText.hide();
+
+            if (editorText.val().trim().length > 0) {
+                editorPreview.html('Loading&hellip;');
+
+                $.post(editor.data('preview-url'), {
+                    'text': editorText.val()
+                }, function(response) {
+                    editorPreview.html(response);
+                });
+            }
+        }
+
+        $('.editor .tabs button').removeClass('active');
+        $(this).addClass('active');
+    });
+
     $(document).click(function(e) {
         var dropdown = $(e.target).parent('.dropdown');
 

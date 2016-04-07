@@ -13,6 +13,7 @@ namespace Boardy\Controllers\Api;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MainController
@@ -20,5 +21,14 @@ class MainController
     public function index(Request $request, Application $app)
     {
         return new JsonResponse();
+    }
+
+    public function markdown(Request $request, Application $app)
+    {
+        $markdown = $app['markdown']->text($request->request->get('text'));
+
+        return Response::create($markdown, 200, [
+            'content-type' => 'text/plain'
+        ]);
     }
 }

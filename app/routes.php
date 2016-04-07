@@ -18,7 +18,6 @@ $app->mount('/p', new Routes\Site\PostRoute);
 $app->mount('/auth', new Routes\Site\AuthRoute);
 
 $app->mount('/api', new Routes\Api\MainRoute);
-$app->mount('/api/users', new Routes\Api\MainRoute);
 
 $app->error(function (\Exception $e, $code) use ($app) {
     $request = $app['request_stack']->getCurrentRequest();

@@ -11,9 +11,6 @@
 
 namespace Boardy\Services;
 
-use Silex\Application;
-use Boardy\Services\Config;
-use Boardy\Services\Auth;
 use Boardy\Models\Board;
 use Boardy\Models\Post;
 use Illuminate\Support\Collection;
@@ -27,7 +24,7 @@ class TemplateModel
      */
     public static function boards()
     {
-        return Board::all()->filter(function ($item) {
+        return Board::all()->filter(function (Board $item) {
             return $item->userHasAccess();
         })->toArray();
     }
@@ -41,7 +38,7 @@ class TemplateModel
     {
         $boards = (new Collection($boards))->pluck('id')->all();
 
-        return $posts = Post::where('parent_id', null)
+        return Post::where('parent_id', null)
             ->whereIn('board_id', $boards)
             ->with('board', 'author')
             ->get()->toArray();

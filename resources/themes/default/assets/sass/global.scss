@@ -290,6 +290,10 @@ input[type="button"], button, .button {
         &:hover {
             background: $brand-success-hover;
         }
+
+        &.active {
+            background: $brand-success-hover;
+        }
     }
 
     &.warning {
@@ -297,6 +301,10 @@ input[type="button"], button, .button {
         color: #fff;
 
         &:hover {
+            background: $brand-warning-hover;
+        }
+
+        &.active {
             background: $brand-warning-hover;
         }
     }
@@ -308,6 +316,10 @@ input[type="button"], button, .button {
         &:hover {
             background: $brand-danger-hover;
         }
+
+        &.active {
+            background: $brand-danger-hover;
+        }
     }
 
     &.info {
@@ -317,6 +329,10 @@ input[type="button"], button, .button {
         &:hover {
             background: $brand-info-hover;
         }
+
+        &.active {
+            background: $brand-info-hover;
+        }
     }
 
     &.neutral {
@@ -324,6 +340,11 @@ input[type="button"], button, .button {
         color: #fff;
 
         &:hover {
+            background: $black-70;
+        }
+
+
+        &.active {
             background: $black-70;
         }
     }
@@ -598,6 +619,8 @@ ul {
 }
 
 .post-list {
+    margin-bottom: 15px;
+
     .post + .post {
         margin-top: 15px;
         padding-top: 15px;
@@ -643,5 +666,43 @@ ul {
                 }
             }
         }
+    }
+}
+
+.editor {
+    .tabs button {
+        margin-bottom: 0;
+        padding: 5px 10px;
+        font-size: 12px;
+
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    textarea {
+        border-color: $brand-info-hover;
+        min-height: 100px;
+        resize: none;
+    }
+
+    .preview {
+        border: 1px solid $brand-info-hover;
+        margin-bottom: 15px;
+        min-height: 100px;
+        padding: 15px;
+        display: none;
+
+        & > *:first-child {
+            margin-top: 0;
+        }
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .actions {
+        text-align: right;
     }
 }

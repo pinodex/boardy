@@ -19,12 +19,12 @@ use Boardy\Models\Post;
 
 class PostController
 {
-    public function index(Request $request, Application $app)
+    public function index(Application $app)
     {
         return $app->redirect($app->path('site.index'));
     }
 
-    public function read(Request $request, Application $app, $id, $slug)
+    public function read(Application $app, $id, $slug)
     {
         try {
             $post = Post::with('author', 'children', 'children.author')->findOrFail($id);

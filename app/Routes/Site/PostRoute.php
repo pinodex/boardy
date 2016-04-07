@@ -20,9 +20,15 @@ class PostRoute implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/',            [PostController::class, 'index']);
+        
+        $controller->get('/', [PostController::class, 'index']);
+        
         $controller->get('/{id}-{slug}', [PostController::class, 'read'])
             ->bind('site.post.read')
+            ->value('slug', null);
+
+        $controller->post('/{id}-{slug}/reply', [PostController::class, 'reply'])
+            ->bind('site.post.reply')
             ->value('slug', null);
         
         return $controller;

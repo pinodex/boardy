@@ -867,11 +867,17 @@ input[type="button"].success, button.success, .button.success {
 input[type="button"].success:hover, button.success:hover, .button.success:hover {
   background: #449d44;
 }
+input[type="button"].success.active, button.success.active, .button.success.active {
+  background: #449d44;
+}
 input[type="button"].warning, button.warning, .button.warning {
   background: #f0ad4e;
   color: #fff;
 }
 input[type="button"].warning:hover, button.warning:hover, .button.warning:hover {
+  background: #ec971f;
+}
+input[type="button"].warning.active, button.warning.active, .button.warning.active {
   background: #ec971f;
 }
 input[type="button"].danger, button.danger, .button.danger {
@@ -881,6 +887,9 @@ input[type="button"].danger, button.danger, .button.danger {
 input[type="button"].danger:hover, button.danger:hover, .button.danger:hover {
   background: #c9302c;
 }
+input[type="button"].danger.active, button.danger.active, .button.danger.active {
+  background: #c9302c;
+}
 input[type="button"].info, button.info, input[type="button"], button, .button, .button.info {
   background: #5bc0de;
   color: #fff;
@@ -888,11 +897,17 @@ input[type="button"].info, button.info, input[type="button"], button, .button, .
 input[type="button"].info:hover, button.info:hover, input[type="button"]:hover, button:hover, .button:hover, .button.info:hover {
   background: #31b0d5;
 }
+input[type="button"].info.active, button.info.active, input.active[type="button"], button.active, .active.button, .button.info.active {
+  background: #31b0d5;
+}
 input[type="button"].neutral, button.neutral, .button.neutral {
   background: gray;
   color: #fff;
 }
 input[type="button"].neutral:hover, button.neutral:hover, .button.neutral:hover {
+  background: #4d4d4d;
+}
+input[type="button"].neutral.active, button.neutral.active, .button.neutral.active {
   background: #4d4d4d;
 }
 
@@ -1107,6 +1122,9 @@ ul.tablets li + li {
   margin: 0;
 }
 
+.post-list {
+  margin-bottom: 15px;
+}
 .post-list .post + .post {
   margin-top: 15px;
   padding-top: 15px;
@@ -1143,6 +1161,36 @@ ul.tablets li + li {
 }
 .post-list .post .content .html > *:last-child {
   margin-bottom: 0;
+}
+
+.editor .tabs button {
+  margin-bottom: 0;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.editor .tabs button:active {
+  box-shadow: none;
+}
+.editor textarea {
+  border-color: #31b0d5;
+  min-height: 100px;
+  resize: none;
+}
+.editor .preview {
+  border: 1px solid #31b0d5;
+  margin-bottom: 15px;
+  min-height: 100px;
+  padding: 15px;
+  display: none;
+}
+.editor .preview > *:first-child {
+  margin-top: 0;
+}
+.editor .preview > *:last-child {
+  margin-bottom: 0;
+}
+.editor .actions {
+  text-align: right;
 }
 
 /*# sourceMappingURL=global.css.map */

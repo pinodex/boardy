@@ -15,18 +15,17 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Boardy\Services\TemplateModel;
 use Boardy\Services\Theme;
 use Boardy\Models\Board;
 
 class BoardController
 {
-    public function index(Request $request, Application $app)
+    public function index(Application $app)
     {
         return $app->redirect($app->path('site.index'));
     }
 
-    public function browse(Request $request, Application $app, $slug)
+    public function browse($slug)
     {
         try {
             $board = Board::bySlug($slug)->toArray();
