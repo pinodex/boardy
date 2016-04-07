@@ -12,7 +12,6 @@
 namespace Boardy\Controllers\Site;
 
 use Silex\Application;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Boardy\Services\Theme;

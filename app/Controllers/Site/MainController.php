@@ -11,13 +11,11 @@
 
 namespace Boardy\Controllers\Site;
 
-use Silex\Application;
-use Symfony\Component\HttpFoundation\Request;
 use Boardy\Services\Theme;
 
 class MainController
 {
-    public function index(Request $request, Application $app)
+    public function index()
     {
         return Theme::view('index');
     }

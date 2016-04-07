@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MainController
 {
-    public function index(Request $request, Application $app)
+    public function index()
     {
         return new JsonResponse();
     }
