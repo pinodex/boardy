@@ -41,6 +41,10 @@ class TwigGlobalFunctionsProvider implements ServiceProviderInterface
                 return call_user_func_array([TemplateModel::class, array_shift($args)], $args);
             }));
 
+            $twig->addFilter(new \Twig_SimpleFilter('markdown', function ($string) use ($app) {
+                return $app['markdown']->text($string);
+            }));
+
             return $twig;
         });
     }

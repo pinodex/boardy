@@ -70,6 +70,7 @@ $app['flashbag'] = $app->share(function () use ($app) {
     return $app['session']->getFlashBag();
 });
 
+$app->register(new Providers\MarkdownServiceProvider());
 $app->register(new Providers\TwigGlobalFunctionsProvider());
 
 $app['twig.loader.filesystem']->addPath(APP . 'Views', 'main');
